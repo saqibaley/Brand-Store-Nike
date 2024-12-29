@@ -39,8 +39,16 @@ export default function Section() {
               Also Available on
             </div>
             <div className="flex flex-row gap-2">
-              <img src={flipKart} alt="Flipkart" className="w-6" />
-              <img src={amazonImg} alt="Amazon" className="w-6" />
+              <img
+                src={flipKart}
+                alt="Flipkart"
+                className="w-6 cursor-pointer"
+              />
+              <img
+                src={amazonImg}
+                alt="Amazon"
+                className="w-6 cursor-pointer"
+              />
             </div>
           </div>
         </div>

@@ -1,50 +1,9 @@
-// // import React from "react";
-// import logo from "../assets/brand_logo.png";
-
-// function Header() {
-//   return (
-//     <div className="container bg-white p-4">
-//       <div className="flex justify-between items-center">
-//         {/* Left: Logo */}
-//         <div className="flex-shrink-0">
-//           <img src={logo} alt="Brand Logo" className="h-8" />
-//         </div>
-
-//         {/* Center: Links */}
-//         <div className="flex space-x-6">
-//           <a href="/" className="text-gray-800 font-semibold">
-//             Home
-//           </a>
-//           <a href="/about" className="text-gray-800 font-semibold">
-//             About
-//           </a>
-//           <a href="/location" className="text-gray-800 font-semibold">
-//             Location
-//           </a>
-//           <a href="/menu" className="text-gray-800 font-semibold">
-//             Menu
-//           </a>
-//         </div>
-
-//         {/* Right: Button */}
-//         <div>
-//           <button className="bg-customRed text-sm text-white px-3 p-1">
-//             Login
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Header;
-
-// import React from "react";
-
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/brand_logo.png";
 import HamburgerMenu from "./hamburger";
 
 function Header() {
+  const location = useLocation(); // Get the current route
   const menuLinks = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -57,30 +16,34 @@ function Header() {
       <div className="flex justify-between items-center">
         {/* Left: Logo */}
         <div className="flex-shrink-0">
-          <img src={logo} alt="Brand Logo" className="h-8" />
+          <Link to="/">
+            <img src={logo} alt="Brand Logo" className="h-8" />
+          </Link>
         </div>
 
-        {/* Center: Links (Hidden on small screens) */}
+        {/* Center: Links */}
         <div className="hidden md:flex space-x-6">
           {menuLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
-              className="text-gray-800 font-semibold underline-animation"
+              to={link.href}
+              className={`text-gray-800 font-semibold underline-animation ${
+                location.pathname === link.href ? "active-link" : ""
+              }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
-        {/* Right: Button (Hidden on small screens) */}
+        {/* Right: Button */}
         <div className="hidden md:block">
           <button className="bg-customRed text-sm text-white px-3 py-1 rounded-md hover:bg-red-600 transition">
             Login
           </button>
         </div>
 
-        {/* Hamburger Menu (Visible on small screens) */}
+        {/* Hamburger Menu */}
         <HamburgerMenu links={menuLinks} loginButton={true} />
       </div>
     </div>
